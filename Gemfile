@@ -60,6 +60,6 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
 
 # for Heroku_test
-group :prodution do
+group :production do
   gem 'pg'
 end

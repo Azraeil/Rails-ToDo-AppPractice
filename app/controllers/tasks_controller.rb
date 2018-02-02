@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   def index
-    today = Time.now.strftime("%m-%d-%Y")
-
-    @undone_tasks = Task.where.(done: false).where("deadline>?", Date.yesterday).order(:deadline)
+    today = Time.now.strftime("%Y-%m-%d")
+    # puts "Today is #{today} !!!!"
+    @undone_tasks = Task.where(done: false).where("deadline>?", Date.yesterday).order(:deadline)
 
     @done_tasks = Task.where(done: true)
 
@@ -16,15 +16,25 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    if @user.save
-      redirect_to(users_path, notice: "建立待辦事項成功！")
+    if @task.save
+      redirect_to(tasks_path, notice: "建立待辦事項成功！")
     else
       render :new
     end
   end
 
+  def done
+    @task = Task.find(params[:id])
+    @task.update_attribute(:done, true)
+    redirect_to tasks_path
+  end
+
   def show
-    @task = Task.find_by(id:params[:id])
+    @task = Task.find_by(id: params[:id])
+  end
+
+  def edit
+    @task = Task.find_by(id: params[:id])
   end
 
   def update
@@ -43,7 +53,8 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+  private
   def task_params
-    params.require(:task).permit(:name, :deadline, :description)
+    params.require(:task).permit(:name, :deadline, :description, :done)
   end
 end

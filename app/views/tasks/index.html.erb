@@ -1,0 +1,90 @@
+<!-- 未完成待辦清單 -->
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <td>未完成待辦事項</td>
+      <td>截止日期</td>
+      <td>說明</td>
+      <td>操作</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @undone_tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.deadline %></td>
+      <td><%= task.description %></td>
+
+      <td>
+        <%= link_to "完成", done_task_path(task.id), method: "done" %>
+        <%= link_to "檢視", task_path(task.id) %>
+        <%= link_to "編輯", edit_task_path(task.id) %>
+        <%= link_to "刪除", task_path(task.id), method: "delete",
+            data: {confirm: "Delete Task #{task.name}, Are you sure ? "} %>
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to " 新增待辦事項", new_task_path %> <br />
+<%= notice %>
+
+<!-- 已完成待辦清單 -->
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <td>已完成待辦事項</td>
+      <td>截止日期</td>
+      <td>說明</td>
+      <td>操作</td>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @done_tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.deadline %></td>
+      <td><%= task.description %></td>
+
+      <td>
+        <%= link_to "檢視", task_path(task.id) %>
+        <%= link_to "編輯", edit_task_path(task.id) %>
+        <%= link_to "刪除", task_path(task.id), method: "delete",
+            data: {confirm: "Delete Task #{task.name}, Are you sure ? "} %>
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- 已過期待辦清單 -->
+<table class="table table-striped table-condensed">
+  <thead>
+    <tr>
+      <td>已過期待辦事項</td>
+      <td>截止日期</td>
+      <td>說明</td>
+      <td>操作</td>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @expired_tasks.each do |task| %>
+    <tr>
+      <td><%= task.name %></td>
+      <td><%= task.deadline %></td>
+      <td><%= task.description %></td>
+
+      <td>
+        <%= link_to "檢視", task_path(task.id) %>
+        <%= link_to "編輯", edit_task_path(task.id) %>
+      </td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>

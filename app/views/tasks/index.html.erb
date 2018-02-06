@@ -16,7 +16,7 @@
       <td><%= task.description %></td>
 
       <td>
-        <%= link_to "完成", done_task_path(task.id), method: "done" %>
+        <%= link_to "完成", done_task_path(task.id), method: :post %>
         <%= link_to "檢視", task_path(task.id) %>
         <%= link_to "編輯", edit_task_path(task.id) %>
         <%= link_to "刪除", task_path(task.id), method: "delete",

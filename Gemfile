@@ -63,3 +63,6 @@ gem 'jquery-rails'
 group :production do
   gem 'pg', '~> 0.18'
 end
+
+# Known vulnerability found
+gem 'loofah', '~> 2.2.1'
